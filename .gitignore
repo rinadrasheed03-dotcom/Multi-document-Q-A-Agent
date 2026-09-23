@@ -16,3 +16,21 @@ __pycache__/
 data/uploads/*
 data/vector_store/*
 .DS_Store
+# IDE files
+.vscode/
+.idea/
+
+# OS shortcuts
+*.lnk
+
+# Logs
+*.log
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Model files
+*.pt
+*.pth
+*.bin
+*.safetensors

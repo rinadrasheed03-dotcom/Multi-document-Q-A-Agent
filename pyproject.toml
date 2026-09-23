@@ -1,20 +1,22 @@
 [project]
-name = "multi-pdf-rag-agent"
+name = "multi-datatype-rag-agent"
 version = "0.1.0"
-description = "Add your description here"
+description = "Multi-datatype Retrieval-Augmented Generation system for document-based question and answer generation"
 readme = "README.md"
 authors = [
-    { name = "sivaprathish", email = "sivaprathishsiva@gmail.com" }
+    { name = "Rinad", email = "rinadrasheed03gmail.com" }
 ]
 requires-python = ">=3.12"
 dependencies = [
     "faiss-cpu>=1.15.0",
-    "groq>=1.6.0",
-    "langchain-core>=1.5.3",
     "langgraph>=1.2.10",
     "numpy>=2.5.1",
     "openai>=2.53.0",
-    "pymupdf>=1.28.2",
+    "pandas>=2.0.0"
+    "pypdf>=5.0.0",
+    "python-docx>=1.1.0",
+    "python-pptx>=1.0.0",
+    "openpyxl>=3.1.0",  
     "pytest>=9.1.1",
     "python-dotenv>=1.2.2",
     "rank-bm25>=0.2.2",
@@ -22,10 +24,11 @@ dependencies = [
     "streamlit>=1.61.1",
     "torch>=2.13.0",
     "torchvision>=0.28.0",
+    "lingua-language-detector>=2.0.0"
 ]
 
 [project.scripts]
-multi-pdf-rag-agent = "multi_pdf_rag_agent:main"
+multi-datatype-rag-agent = "multi_datatype_rag_agent:main"
 
 [build-system]
 requires = ["uv_build>=0.12.1,<0.13.0"]

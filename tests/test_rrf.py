@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import streamlit as st
 
-from src.agents.answer_agent import AnswerAgent
+from src.agents.QuestionGenerationAgent import AnswerAgent
 from src.agents.bm25_retrieval_agent import BM25RetrievalAgent
 from src.agents.duplicate_aware_agent import DuplicateAwareAgent
 from src.agents.pdf_processing_agent import PDFProcessingAgent
@@ -85,7 +85,7 @@ def build_rag_system(uploaded_files) -> tuple:
 
     answer_agent = AnswerAgent(
         api_key=settings.nvidia_api_key,
-        model_name=settings.llm_model,
+        model_name=settings.nvidia_model,
         temperature=settings.llm_temperature,
         max_tokens=settings.llm_max_tokens,
     )

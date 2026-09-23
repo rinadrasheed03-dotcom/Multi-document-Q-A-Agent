@@ -1,55 +1,45 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from io import BytesIO
 
-import fitz
-
-
-@dataclass
-class PDFPage:
-    """Text extracted from one PDF page."""
-
-    pdf_name: str
-    page_number: int
-    text: str
+from pypdf import PdfReader
 
 
-class PDFLoader:
-    """Extract text from uploaded PDF files."""
+def load_pdf(file_bytes: bytes, file_name: str) -> list[dict]:
+    """
+    Extract text from every PDF page.
 
-    @staticmethod
-    def load_pdf(
-        file_name: str,
-        file_bytes: bytes,
-    ) -> list[PDFPage]:
-        pages: list[PDFPage] = []
+    Returns:
+        [
+            {
+                "text": "...",
+                "source_file": "example.pdf",
+                "page_number": 1
+            }
+        ]
+    """
 
-        try:
-            document = fitz.open(
-                stream=file_bytes,
-                filetype="pdf",
-            )
+    reader = PdfReader(BytesIO(file_bytes))
 
-            for page_index in range(document.page_count):
-                page = document.load_page(page_index)
-                text = page.get_text("text").strip()
+    documents = []
 
-                if not text:
-                    continue
+    for page_number, page in enumerate(
+        reader.pages,
+        start=1,
+    ):
+        text = page.extract_text() or ""
 
-                pages.append(
-                    PDFPage(
-                        pdf_name=file_name,
-                        page_number=page_index + 1,
-                        text=text,
-                    )
-                )
+        text = text.strip()
 
-            document.close()
+        if not text:
+            continue
 
-        except Exception as exc:
-            raise ValueError(
-                f"Unable to process PDF '{file_name}': {exc}"
-            ) from exc
+        documents.append(
+            {
+                "text": text,
+                "source_file": file_name,
+                "page_number": page_number,
+            }
+        )
 
-        return pages
+    return documents

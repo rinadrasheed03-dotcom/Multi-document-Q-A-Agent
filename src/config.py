@@ -13,38 +13,61 @@ load_dotenv()
 class Settings:
     """Application configuration loaded from environment variables."""
 
-    groq_api_key: str = os.getenv("GROQ_API_KEY", "")
+    # ============================================================
+    # NVIDIA NIM / LLM
+    # ============================================================
 
-    llm_model: str = os.getenv(
-        "LLM_MODEL",
-        "llama-3.3-70b-versatile",
+    nvidia_api_key: str = os.getenv(
+        "NVIDIA_API_KEY",
+        "",
+    )
+
+    nvidia_base_url: str = os.getenv(
+        "NVIDIA_BASE_URL",
+        "https://integrate.api.nvidia.com/v1",
+    )
+
+    nvidia_model: str = os.getenv(
+        "NVIDIA_MODEL",
+        "",
     )
 
     llm_temperature: float = float(
-        os.getenv("LLM_TEMPERATURE", "0.1")
+        os.getenv("LLM_TEMPERATURE", "0.2")
     )
 
     llm_max_tokens: int = int(
-        os.getenv("LLM_MAX_TOKENS", "700")
-    )
-
-    llm_timeout_seconds: float = float(
-        os.getenv("LLM_TIMEOUT_SECONDS", "180")
+        os.getenv("LLM_MAX_TOKENS", "4096")
     )
 
     llm_max_retries: int = int(
         os.getenv("LLM_MAX_RETRIES", "3")
     )
 
+
+    # ============================================================
+    # Embedding
+    # ============================================================
+
     embedding_model: str = os.getenv(
         "EMBEDDING_MODEL",
         "sentence-transformers/all-MiniLM-L6-v2",
     )
 
+
+    # ============================================================
+    # Reranker
+    # ============================================================
+
     reranker_model: str = os.getenv(
         "RERANKER_MODEL",
         "cross-encoder/ms-marco-MiniLM-L-6-v2",
     )
+
+
+    # ============================================================
+    # Chunking
+    # ============================================================
 
     chunk_size: int = int(
         os.getenv("CHUNK_SIZE", "1000")
@@ -53,6 +76,11 @@ class Settings:
     chunk_overlap: int = int(
         os.getenv("CHUNK_OVERLAP", "150")
     )
+
+
+    # ============================================================
+    # Retrieval
+    # ============================================================
 
     vector_top_k: int = int(
         os.getenv("VECTOR_TOP_K", "20")
@@ -77,6 +105,11 @@ class Settings:
     rrf_constant: int = int(
         os.getenv("RRF_CONSTANT", "60")
     )
+
+
+    # ============================================================
+    # Duplicate detection
+    # ============================================================
 
     duplicate_threshold: float = float(
         os.getenv("DUPLICATE_THRESHOLD", "0.94")

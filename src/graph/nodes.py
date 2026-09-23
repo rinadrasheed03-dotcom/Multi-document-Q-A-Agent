@@ -3,7 +3,7 @@ from __future__ import annotations
 import time
 from typing import Any
 
-from src.agents.answer_agent import AnswerAgent
+from src.agents.QuestionGenerationAgent import AnswerAgent
 from src.agents.bm25_retrieval_agent import BM25RetrievalAgent
 from src.agents.duplicate_aware_agent import DuplicateAwareAgent
 from src.agents.reranking_agent import RerankingAgent
